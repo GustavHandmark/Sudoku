@@ -9,9 +9,9 @@ public class SudokuModel {
 	}
 
 	/**
-	 * Sets
+	 * Sets the given value at the destined position in the matrix
 	 * 
-	 * @param value
+	 * @param value, Integer between 1 and 9
 	 * @param row
 	 * @param column
 	 */
