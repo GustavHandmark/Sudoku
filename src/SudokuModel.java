@@ -27,4 +27,5 @@ public class SudokuModel {
 		return nbrsMatrix[row][column];
 	}
 
+	
 }
