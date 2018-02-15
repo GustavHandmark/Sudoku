@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class SodukuModel {
+public class SudokuModel {
 
     
     public static void main(String[] args){
