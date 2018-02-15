@@ -11,7 +11,7 @@ public class SudokuModel {
 	/**
 	 * Sets the given value at the given position in the matrix
 	 * 
-	 * @param value, Integer between 1 and 9
+	 * @param value
 	 * @param row
 	 * @param column
 	 */
@@ -23,6 +23,13 @@ public class SudokuModel {
 		}
 	}
 
+	/**
+	 * Return the value at the destined position in the matrix, or 0 if a 
+	 * value has yet to be assigned.
+	 * @param row
+	 * @param column
+	 * @return
+	 */
 	public int getValue(int row, int column) {
 		return matrix[row][column];
 	}
