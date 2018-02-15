@@ -2,14 +2,14 @@ import java.util.*;
 
 public class SudokuModel {
 	// matrix representing the sudoku grid.
-	private int[][] nbrsMatrix;
+	private int[][] matrix;
 
 	public SudokuModel() {
-		nbrsMatrix = new int[9][9];
+		matrix = new int[9][9];
 	}
 
 	/**
-	 * Sets the given value at the destined position in the matrix
+	 * Sets the given value at the given position in the matrix
 	 * 
 	 * @param value, Integer between 1 and 9
 	 * @param row
@@ -17,14 +17,14 @@ public class SudokuModel {
 	 */
 	public void setValue(int value, int row, int column) {
 		if (value > 0 && value <= 9) {
-			nbrsMatrix[row][column] = value;
+			matrix[row][column] = value;
 		} else {
 			throw new IllegalArgumentException("Value needs to be an integer between 1 and 9");
 		}
 	}
 
 	public int getValue(int row, int column) {
-		return nbrsMatrix[row][column];
+		return matrix[row][column];
 	}
 
 	
