@@ -17,11 +17,39 @@ public class SudokuModel {
 	 * @param column
 	 */
 	public void setValue(int value, int row, int column) {
-		if (value > 0 && value < 10)
+		if (value > 0 && value < 10) {
+			checkRules(value, row, column);
 			matrix[row][column] = value;
-		else
+		} else
 			throw new IllegalArgumentException("Value needs to be an integer between 1 and 9");
 
+	}
+
+	/**
+	 * Return true if the placement of a value is acceptable, else false. RULES 1.
+	 * Only one occurance of a number per line 2. Only one occurance of a number
+	 * within a region
+	 * 
+	 * @param value
+	 * @param row
+	 * @param column
+	 * @return
+	 */
+	public boolean checkRules(int value, int row, int column) {
+		for (int i = 0; i < 9; i++) {
+			if (i != column && matrix[row][i] == value) { // check row for duplicate
+				System.out.println("Detta värde finns redan på denna rad");
+				return false;
+			} else if (i != row && matrix[i][column] == value) {// check column for duplicate
+				System.out.println("Detta värde finns redan i denna kolumn");
+				return false;
+			}
+		}
+		// Check region
+		
+		
+		
+		return true;
 	}
 
 	/**
@@ -48,9 +76,14 @@ public class SudokuModel {
 			for (int j = 0; j < matrix[i].length; j++) {
 				if (j != 0 && (j % 3) == 0)
 					System.out.print("| ");
-				System.out.print(matrix[i][j] + " ");
+				if (matrix[i][j] == 0) {
+					System.out.print("□ ");
+				} else {
+					System.out.print(matrix[i][j] + " ");
+				}
 			}
 			System.out.println();
 		}
+
 	}
 }
