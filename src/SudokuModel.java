@@ -2,12 +2,10 @@ import java.util.*;
 
 public class SudokuModel {
 	// matrix representing the sudoku grid.
-	private int[][] matrix;
-	private int[][] regionTable;
-	private int[][] tableT;
+	private Cell[][] matrix;
 
 	public SudokuModel() {
-		matrix = new int[9][9];
+		matrix = new Cell[9][9];
 
 	}
 
@@ -20,11 +18,17 @@ public class SudokuModel {
 	 */
 	public void setValue(int value, int row, int column) {
 		if (value > 0 && value < 10) {
-			checkRules(value, row, column);
-			matrix[row][column] = value;
+			// checkRules(value, row, column);
+			matrix[row][column] = new Cell(value, setRegion(row, column));
 		} else
 			throw new IllegalArgumentException("Value needs to be an integer between 1 and 9");
 
+	}
+
+	private int setRegion(int row, int column) {
+		int regionRow = (row) / 3; // zero based majorRow
+		int regionCol = (column) / 3; // zero based majorCol
+		return regionCol + regionRow * 3 + 1;
 	}
 
 	/**
@@ -39,10 +43,10 @@ public class SudokuModel {
 	 */
 	public boolean checkRules(int value, int row, int column) {
 		for (int i = 0; i < 9; i++) {
-			if (i != column && matrix[row][i] == value) { // check row for duplicate
+			if (i != column && matrix[row][i].value == value) { // check row for duplicate
 				System.out.println("Detta värde finns redan på denna rad");
 				return false;
-			} else if (i != row && matrix[i][column] == value) {// check column for duplicate
+			} else if (i != row && matrix[i][column].value == value) {// check column for duplicate
 				System.out.println("Detta värde finns redan i denna kolumn");
 				return false;
 			}
@@ -62,23 +66,26 @@ public class SudokuModel {
 	 * @return
 	 */
 	public int getValue(int row, int column) {
-		return matrix[row][column];
+		return matrix[row][column].value;
 	}
 
-	private void generateRegionTable() {
-		for (int i = 0, k = 0; i < 9; i++) {
-			// generate vertical regions
-			for (int j = 0; j < 9; j++)
-				regionTable[k][j] = new tableT(i, j);
-			k++;
-			// generate horizontal regions
-			for (int j = 0; j < 9; j++)
-				regionTable[k][j] = new table(j, i);
-			k++;
-			// generate 3x3 regions
-			for (int j = 0; j < 9; j++)
-				regionTable[k][j] = new table((i / 3) * 3 + j / 3, (i % 3) * 3 + j % 3);
-			k++;
+	public int getRegion(int row, int column) {
+		return matrix[row][column].region;
+	}
+
+	// Här försöker jag definiera en "Cell", en ny klass vi gör matrisen av så att
+	// den kan ha både värde och region
+	static class Cell {
+		int value;
+		int region;
+
+		private Cell(int v, int r) {
+			this.value = v;
+			this.setRegion(r);
+		}
+
+		private void setRegion(int r) {
+			this.region = r;
 		}
 	}
 
@@ -94,10 +101,10 @@ public class SudokuModel {
 			for (int j = 0; j < matrix[i].length; j++) {
 				if (j != 0 && (j % 3) == 0)
 					System.out.print("| ");
-				if (matrix[i][j] == 0) {
+				if (matrix[i][j] == null) {
 					System.out.print("□ ");
 				} else {
-					System.out.print(matrix[i][j] + " ");
+					System.out.print(matrix[i][j].value + " ");
 				}
 			}
 			System.out.println();
