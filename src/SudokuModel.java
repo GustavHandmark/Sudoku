@@ -6,7 +6,6 @@ public class SudokuModel {
 
 	public SudokuModel() {
 		matrix = new Cell[9][9];
-
 	}
 
 	/**
@@ -41,7 +40,10 @@ public class SudokuModel {
 	 * @param column
 	 * @return
 	 */
-	public boolean checkRules(int value, int row, int column) {
+	public boolean checkRules(int value, int row, int column) {// Problem med att icke-skapade Celler är null. Antingen
+																// fixar vi det så att den struntar i null här, eller så
+																// ger vi alla celler value=0 från början. Avkommentera
+																// rad 20 för att testa
 		for (int i = 0; i < 9; i++) {
 			if (i != column && matrix[row][i].value == value) { // check row for duplicate
 				System.out.println("Detta värde finns redan på denna rad");
@@ -76,7 +78,7 @@ public class SudokuModel {
 	// Här försöker jag definiera en "Cell", en ny klass vi gör matrisen av så att
 	// den kan ha både värde och region
 	static class Cell {
-		int value;
+		int value = 0;
 		int region;
 
 		private Cell(int v, int r) {
