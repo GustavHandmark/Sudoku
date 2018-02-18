@@ -16,11 +16,8 @@ public class SudokuModel {
 	 * @param column
 	 */
 	public void setValue(int value, int row, int column) {
-		if (value > 0 && value < 10) {
-			// checkRules(value, row, column);
-			matrix[row][column] = new Cell(value, setRegion(row, column));
-		} else
-			throw new IllegalArgumentException("Value needs to be an integer between 1 and 9");
+		checkRules(value, row, column); // hur hanterar vi ifall denna returnar false?
+		matrix[row][column] = new Cell(value, setRegion(row, column));
 
 	}
 
@@ -31,30 +28,33 @@ public class SudokuModel {
 	}
 
 	/**
+	 * INTE KLAR - TODO: Kolla region
+	 * 
 	 * Return true if the placement of a value is acceptable, else false. RULES 1.
-	 * Only one occurance of a number per line 2. Only one occurance of a number
-	 * within a region
+	 * talet måste vara mellan 1 och 9. 2. Only one occurance of a number per row ||
+	 * column 3. Only one occurance of a number within a region
 	 * 
 	 * @param value
 	 * @param row
 	 * @param column
 	 * @return
 	 */
-	public boolean checkRules(int value, int row, int column) {// Problem med att icke-skapade Celler är null. Antingen
-																// fixar vi det så att den struntar i null här, eller så
-																// ger vi alla celler value=0 från början. Avkommentera
-																// rad 20 för att testa
-		for (int i = 0; i < 9; i++) {
-			if (i != column && matrix[row][i].value == value) { // check row for duplicate
-				System.out.println("Detta värde finns redan på denna rad");
-				return false;
-			} else if (i != row && matrix[i][column].value == value) {// check column for duplicate
-				System.out.println("Detta värde finns redan i denna kolumn");
-				return false;
-			}
-		}
+	public boolean checkRules(int value, int row, int column) {
+		if (value > 0 && value < 10) {
 
-		// Check region
+			for (int i = 0; i < 9; i++) {
+				if (matrix[row][i] != null || matrix[i][column] != null) {
+					if (i != column && matrix[row][i].value == value) { // check row for duplicate
+						System.out.println("Detta värde finns redan på denna rad ");
+						return false;
+					} else if (i != row && matrix[i][column].value == value) {// check column for duplicate
+						System.out.println("Detta värde finns redan i denna kolumn ");
+						return false;
+					}
+				}
+			}
+		} else
+			throw new IllegalArgumentException("Value needs to be an integer between 1 and 9");
 
 		return true;
 	}
