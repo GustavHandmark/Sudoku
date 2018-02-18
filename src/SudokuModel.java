@@ -3,6 +3,8 @@ import java.util.*;
 public class SudokuModel {
 	// matrix representing the sudoku grid.
 	private int[][] matrix;
+	private int[][] regionTable;
+	private int[][] tableT;
 
 	public SudokuModel() {
 		matrix = new int[9][9];
@@ -45,10 +47,9 @@ public class SudokuModel {
 				return false;
 			}
 		}
+
 		// Check region
-		
-		
-		
+
 		return true;
 	}
 
@@ -62,6 +63,23 @@ public class SudokuModel {
 	 */
 	public int getValue(int row, int column) {
 		return matrix[row][column];
+	}
+
+	private void generateRegionTable() {
+		for (int i = 0, k = 0; i < 9; i++) {
+			// generate vertical regions
+			for (int j = 0; j < 9; j++)
+				regionTable[k][j] = new tableT(i, j);
+			k++;
+			// generate horizontal regions
+			for (int j = 0; j < 9; j++)
+				regionTable[k][j] = new table(j, i);
+			k++;
+			// generate 3x3 regions
+			for (int j = 0; j < 9; j++)
+				regionTable[k][j] = new table((i / 3) * 3 + j / 3, (i % 3) * 3 + j % 3);
+			k++;
+		}
 	}
 
 	/**
