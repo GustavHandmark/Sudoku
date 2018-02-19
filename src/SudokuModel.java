@@ -19,7 +19,7 @@ public class SudokuModel {
 
 				// TEST
 				System.out.println("regionList[" + i + "," + j + "] = matrix[" + (i / 3) * 3 + j / 3 + "," + (i % 3) * 3
-						+ j % 3 + "], region:" + getRegion(i, j));
+						+ j % 3 + "] region:" + getRegion(i, j));
 			}
 		}
 
