@@ -16,6 +16,10 @@ public class SudokuModel {
 			for (int j = 0; j < 9; j++) {
 				matrix[i][j] = new Cell(0, getRegion(i, j));
 				regionList[i][j] = matrix[(i / 3) * 3 + j / 3][(i % 3) * 3 + j % 3]; // Inte heeelt rätt
+
+				// TEST
+				System.out.println("regionList[" + i + "," + j + "] = matrix[" + (i / 3) * 3 + j / 3 + "," + (i % 3) * 3
+						+ j % 3 + "], region:" + getRegion(i, j));
 			}
 		}
 
