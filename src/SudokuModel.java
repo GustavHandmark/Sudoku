@@ -95,7 +95,7 @@ public class SudokuModel {
 	 * TEST METHOD Prints the matrix in console with VERY NICE layout and design
 	 * 
 	 */
-	public void printMatrix(Cell[][] matrix) {
+	public void printMatrix() {
 		for (int i = 0; i < matrix.length; i++) {
 			if (i != 0 && (i % 3) == 0) {
 				System.out.print("----- + ----- + -----\n");

@@ -15,7 +15,7 @@ public class Main {
 		sm.setValue(4, 4, 4);
 		sm.setValue(19, 2, 7);
 
-	//	sm.printMatrix();
+		sm.printMatrix();
 
 	}
 }
