@@ -13,7 +13,7 @@ public class Main {
 		sm.setValue(4, 3, 2);
 		sm.setValue(4, 8, 5);
 		sm.setValue(4, 4, 4);
-		sm.setValue(19, 7, 8);
+		sm.setValue(19, 2, 7);
 
 		sm.printMatrix();
 
