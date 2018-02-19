@@ -47,32 +47,24 @@ public class SudokuModel {
 					if (i != column && matrix[row][i].value == value) { // check row for duplicate
 						System.out.println("Detta värde finns redan på denna rad ");
 						return false;
-					} else if (i != row && matrix[i][column].value == value) {// check column for duplicate
+					} 
+					else if (i != row && matrix[i][column].value == value) {// check column for duplicate
 						System.out.println("Detta värde finns redan i denna kolumn ");
 						return false;
 					}
+					else if () {
+						int r = matrix[row][column].region;
+						
+					}
 				}
 			}
+			
+			
+			
 		} else
-			throw new IllegalArgumentException("Value needs to be an integer between 1 and 9");
+			System.out.print("Value needs to be an integer between 1 and 9");
 
 		return true;
-	}
-
-	/**
-	 * Return the value at the destined position in the matrix, or 0 if a value has
-	 * yet to be assigned.
-	 * 
-	 * @param row
-	 * @param column
-	 * @return
-	 */
-	public int getValue(int row, int column) {
-		return matrix[row][column].value;
-	}
-
-	public int getRegion(int row, int column) {
-		return matrix[row][column].region;
 	}
 
 	// Här försöker jag definiera en "Cell", en ny klass vi gör matrisen av så att
@@ -89,6 +81,15 @@ public class SudokuModel {
 		private void setRegion(int r) {
 			this.region = r;
 		}
+	}
+
+	// WIP
+	private Cell[] getRegionList(int r) {
+		Cell[] list = new Cell[9];
+		for(Cell c : list) {
+			c = 
+		}
+		
 	}
 
 	/**
