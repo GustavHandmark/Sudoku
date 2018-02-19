@@ -14,11 +14,14 @@ public class SudokuModel {
 	private void populateCells() {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				matrix[i][j] = new Cell(0, setRegion(i, j));
-				regionList[setRegion(i, j)][j] = matrix[i][j];// BETER SIG SKUMT WHY | ah fö att j blir fel
+				matrix[i][j] = new Cell(0, getRegion(i, j));
+				regionList[i][j] = matrix[(i / 3) * 3 + j / 3][(i % 3) * 3 + j % 3]; // Inte heeelt rätt
 			}
 		}
+
 	}
+
+	// (i/3)*3+j/3, (i%3)*3+j%3
 
 	/**
 	 * Sets the given value at the given position in the matrix
@@ -33,7 +36,7 @@ public class SudokuModel {
 		matrix[row][column].value = value;
 	}
 
-	private int setRegion(int row, int column) {
+	private int getRegion(int row, int column) {
 		int regionRow = (row) / 3;
 		int regionCol = (column) / 3;
 		return regionCol + regionRow * 3;
@@ -92,7 +95,7 @@ public class SudokuModel {
 	 * TEST METHOD Prints the matrix in console with VERY NICE layout and design
 	 * 
 	 */
-	public void printMatrix() {
+	public void printMatrix(Cell[][] matrix) {
 		for (int i = 0; i < matrix.length; i++) {
 			if (i != 0 && (i % 3) == 0) {
 				System.out.print("----- + ----- + -----\n");
