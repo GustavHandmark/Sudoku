@@ -86,9 +86,7 @@ public class SudokuModel {
 	// WIP
 	private Cell[] getRegionList(int r) {
 		Cell[] list = new Cell[9];
-		for(Cell c : list) {
-			c = 
-		}
+		
 		
 	}
 
