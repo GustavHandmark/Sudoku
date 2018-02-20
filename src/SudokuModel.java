@@ -15,11 +15,15 @@ public class SudokuModel {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				matrix[i][j] = new Cell(0, getRegion(i, j));
-				regionList[i][j] = matrix[(i / 3) * 3 + j / 3][(i % 3) * 3 + j % 3]; // Inte heeelt rätt
+			}
+		}
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				regionList[i][j] = matrix[((i / 3) * 3 + j / 3)][((i % 3) * 3 + j % 3)]; // FUNKAR, men måste vara i en
+																							// egen nested for-loop
 
-				// TEST
-				System.out.println("regionList[" + i + "," + j + "] = matrix[" + (i / 3) * 3 + j / 3 + "," + (i % 3) * 3
-						+ j % 3 + "] region:" + getRegion(i, j));
+				System.out.println("regionList[" + i + "," + j + "] = matrix[" + ((i / 3) * 3 + j / 3) + "," // TEST
+						+ ((i % 3) * 3 + j % 3) + "] region:" + getRegion(i, j));
 			}
 		}
 
@@ -111,6 +115,7 @@ public class SudokuModel {
 					System.out.print("□ ");
 				} else {
 					System.out.print(matrix[i][j].value + " ");
+					// System.out.print(matrix[i][j].region + " "); // TEST
 				}
 			}
 			System.out.println();
