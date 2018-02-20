@@ -72,15 +72,18 @@ public class SudokuModel {
 			for (int i = 0; i < 9; i++) {
 				if (matrix[row][i] != null || matrix[i][column] != null) {
 					if (i != column && matrix[row][i].value == value) { // check row for duplicate
-						System.out.println("Detta värde finns redan på denna rad: " + matrix[row][i].value);
+						System.out.println("Detta värde finns redan på denna rad på plats: " + matrix[row][i].value
+								+ "[" + row + "," + i + "]");
 						return false;
 					} else if (i != row && matrix[i][column].value == value) {// check column for duplicate
-						System.out.println("Detta värde finns redan i denna kolumn: " + matrix[i][column].value);
+						System.out.println("Detta värde finns redan i denna kolumn på plats: " + matrix[i][column].value
+								+ "[" + i + "," + column + "]");
 						return false;
 					} else if (regionList[getRegion(row, column)][i].value == value) {// INTE KLAR, inget undantag för
 																						// sig själv
-						System.out.println(
-								"Detta värde finns redan i denna region: " + matrix[getRegion(row, column)][i].value);
+						System.out.println("Detta värde finns redan i denna region på plats: "
+								+ matrix[getRegion(row, column)][i].value + "[" + getRegion(row, column) + "," + i
+								+ "]");
 						return false;
 					}
 

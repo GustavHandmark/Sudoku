@@ -8,6 +8,9 @@ public class Main {
 		sm.setValue(5, 8, 8);
 		sm.setValue(9, 7, 8);
 		sm.setValue(4, 3, 5);
+		sm.setValue(8, 6, 3);
+		sm.setValue(2, 2, 5);
+		sm.setValue(5, 1, 8);
 
 		// testar reglerna
 		sm.setValue(4, 3, 2);
