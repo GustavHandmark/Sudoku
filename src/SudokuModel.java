@@ -11,12 +11,15 @@ public class SudokuModel {
 		nbrsMatrix = new int[9][9];
 	}
 	
-	public SudokuModel(int[][] preexisting){
+	public boolean checkMatrix(int[][] existing){
 		//Checker for importing a preexisting matrix, should match the criterias given by checkrules:
 		// so for each value in the imported matrix, call checkrules
 		// should be a 9 by 9 matrix, else throw illegalargumentexception
+		return false;
+		//when this returns false, the sudoku won't be possible to solve,
 		
 	}
+		
 	
 
 	/**
