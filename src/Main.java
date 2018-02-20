@@ -21,6 +21,7 @@ public class Main {
 		
 		sm.setValue(6, 0, 7);
 		sm.setValue(2, 0, 8);
+
 		sm.setValue(5, 1, 8);
 
 		sm.setValue(5, 4, 1);
