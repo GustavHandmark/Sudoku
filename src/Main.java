@@ -10,6 +10,7 @@ public class Main {
 		sm.setValue(4, 3, 5);
 		sm.setValue(8, 6, 3);
 		sm.setValue(2, 2, 5);
+		sm.setValue(9, 4, 8);
 		sm.setValue(5, 1, 8);
 
 		
