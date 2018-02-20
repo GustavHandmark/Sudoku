@@ -26,6 +26,12 @@ public class SudokuModel {
 	public int getValue(int row, int col) {
 		return nbrsMatrix[row][col];
 	}
+	
+	public int[][] getMatrix(){
+		return nbrsMatrix;
+	}
+	
+	
 	/**
 	 * Return true if the placement of a value is acceptable, else false. RULES
 	 * 1. talet måste vara mellan 1 och 9. 2. Only one occurance of a number per
@@ -38,32 +44,56 @@ public class SudokuModel {
 	 * @param column
 	 * @return
 	 */
-	public boolean checkRules(int value, int row, int column) {
-		if (value > 0 && value < 10) {
-			for (int i = 0; i < 9; i++) {
-				if (matrix[row][i] != null || matrix[i][column] != null) {
-					if (i != column && matrix[row][i].value == value) { // check row
-						System.out.println("Detta värde finns redan på denna rad på plats: " + matrix[row][i].value + "[" + row + "," + i + "]");
-						return false;
-					} else if (i != row && matrix[i][column].value == value) {// check column
-						System.out.println("Detta värde finns redan i denna kolumn på plats: " + matrix[i][column].value + "[" + i + "," + column + "]");
-						return false;
-					} else if (value != 0 && regionList[getRegion(row, column)][i].value == value) {// INTE KLAR
-						System.out.println(
-								"Detta värde finns redan i denna region på plats: " + regionList[getRegion(row, column)][i].value + "[" + getRegion(row, column) + "," + column + "]");
-						return false;
-					}
-				}
-			}
-
-		} else {
-			System.out.print("Value needs to be an integer between 1 and 9");
-			return false;
-		}
-
-		return true;
+//	public boolean checkRules(int value, int row, int column) {
+//		if (value > 0 && value < 10) {
+//			for (int i = 0; i < 9; i++) {
+//				if (matrix[row][i] != null || matrix[i][column] != null) {
+//					if (i != column && matrix[row][i].value == value) { // check row
+//						System.out.println("Detta värde finns redan på denna rad på plats: " + matrix[row][i].value + "[" + row + "," + i + "]");
+//						return false;
+//					} else if (i != row && matrix[i][column].value == value) {// check column
+//						System.out.println("Detta värde finns redan i denna kolumn på plats: " + matrix[i][column].value + "[" + i + "," + column + "]");
+//						return false;
+//					} else if (value != 0 && regionList[getRegion(row, column)][i].value == value) {// INTE KLAR
+//						System.out.println(
+//								"Detta värde finns redan i denna region på plats: " + regionList[getRegion(row, column)][i].value + "[" + getRegion(row, column) + "," + column + "]");
+//						return false;
+//					}
+//				}
+//			}
+//
+//		} else {
+//			System.out.print("Value needs to be an integer between 1 and 9");
+//			return false;
+//		}
+//
+//		return true;
+//	}
+	public boolean solveSudoku(){
+		return solveSudoku(0,0);
+	}
+	
+	private boolean solveSudoku(int row, int col){
+		//implement recursive solver for the sudoku.
+		return false;
+	}
+	
+	private boolean checkRow(int row, int col, int value){
+		//implement the row check.
+		return false;
+		
+	}
+	private boolean checkColumn(int row, int col, int value){
+		//implement the column check.
+		return false;
 	}
 
+	
+	public boolean checkRules(int row, int col, int value){
+		// Combines the conditions for row, column, region to assert whether or not
+		// the inserted value is possible.
+		return false;
+	}
 
 	/**
 	 * returns true if the given value is already found within the region
