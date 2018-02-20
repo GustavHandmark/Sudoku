@@ -12,6 +12,7 @@ public class Main {
 		sm.setValue(2, 2, 5);
 		sm.setValue(5, 1, 8);
 
+		
 		// testar reglerna
 		sm.setValue(4, 3, 2);
 		sm.setValue(5, 8, 5);
