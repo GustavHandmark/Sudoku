@@ -4,10 +4,16 @@ public class SudokuModel {
 	// matrix representing the sudoku grid.
 	private int[][] nbrsMatrix;
 
+	/**
+	 * Creates an empty Sudoku
+	 */
 	public SudokuModel() {
 		nbrsMatrix = new int[9][9];
 	}
 
+	
+	
+	
 	/**
 	 * Sets the given value at the given position in the matrix
 	 * 
@@ -77,43 +83,45 @@ public class SudokuModel {
 		//implement recursive solver for the sudoku.
 		return false;
 	}
-	
-	private boolean checkRow(int row, int col, int value){
-		//implement the row check.
-		return false;
-		
-	}
-	private boolean checkColumn(int row, int col, int value){
-		//implement the column check.
-		return false;
-	}
-
-	
-	public boolean checkRules(int row, int col, int value){
-		// Combines the conditions for row, column, region to assert whether or not
-		// the inserted value is possible.
-		return false;
-	}
 
 	/**
-	 * returns true if the given value is already found within the region
-	 * corresponding to the given row and column.
+	 * returns false if the given value is already found within the sudoku.
+	 * returns true if the given value is a possible candidate.
 	 * @param row
 	 * @param col
 	 * @param value
 	 * @return
 	 */
-	private boolean checkRegion(int row, int col, int value) {
+	private boolean checkRules(int row, int col, int value) {
+		//Checks if the parameter value is permitted depending on the numbers in the given row
+		//the parameter value should not return false.
+		for(int i = 0; i<=9;i++){
+			if(nbrsMatrix[row][i]==value && i !=col){
+				return false;
+			}
+		}
+		
+		//Checks if the value is permitted depending on the numbers in the given column,
+		//the parameter value should not return false.
+		for(int i = 0; i<=9; i++){
+			if(nbrsMatrix[i][col] == value && i != row){
+				return false;
+			}
+		}
+		
+		//Checks if the value is permitted depending on the numbers in the matrix region.
 		int regionRow = (row / 3) * 3;
 		int regionCol = (col / 3) * 3;
 
 		for (int i = regionRow; i <= regionRow + 2; i++) {
 			for (int j = regionCol; j <= regionCol + 2; i++) {
-				if (nbrsMatrix[i][j] == value) {
+				// The number which we're checking should not throw a false,
+				if (nbrsMatrix[i][j] == value && (regionRow + i) != row && (regionCol + j) != col) {
 					return false;
 				}
 			}
 		}
+		
 		return true;
 	}
 	
