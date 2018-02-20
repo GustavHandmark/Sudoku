@@ -1,11 +1,35 @@
 import java.util.*;
 
-public class SudokuModel {
+public class SudokuModel2BackupPreClassRemoval {
 	// matrix representing the sudoku grid.
-	private int[][] nbrsMatrix;
+	private Cell[][] matrix;
+	private Cell[][] regionList;
 
-	public SudokuModel() {
-		nbrsMatrix = new int[9][9];
+	public SudokuModel2BackupPreClassRemoval() {
+		matrix = new Cell[9][9];
+		regionList = new Cell[9][9];
+		populateCells();
+	}
+
+	/**
+	 * Creates value=0, region=getRegion(i,j) Cells for all [9][9] of matrix[][] and then links every cell to vectors in regionList[][]
+	 * 
+	 */
+	private void populateCells() {
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				matrix[i][j] = new Cell(0, getRegion(i, j));
+			}
+		}
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				regionList[i][j] = matrix[((i / 3) * 3 + j / 3)][((i % 3) * 3 + j % 3)];
+
+				// TEST
+				System.out.println("regionList[" + i + "," + j + "] = matrix[" + ((i / 3) * 3 + j / 3) + "," + ((i % 3) * 3 + j % 3) + "]");
+			}
+		}
+
 	}
 
 	/**
@@ -16,20 +40,19 @@ public class SudokuModel {
 	 * @param column
 	 */
 	public void setValue(int value, int row, int column) {
-		if (value > 0 && value <= 9) {
-			nbrsMatrix[row][column] = value;
-		} else {
-			throw new IllegalArgumentException("Value needs to be an integer between (and including) 1 and 9");
-		}
+		if (checkRules(value, row, column))
+			matrix[row][column].value = value;
 	}
 
-	public int getValue(int row, int col) {
-		return nbrsMatrix[row][col];
+	private int getRegion(int row, int column) {
+		int regionRow = (row) / 3;
+		int regionCol = (column) / 3;
+		return regionCol + regionRow * 3;
 	}
+
 	/**
-	 * Return true if the placement of a value is acceptable, else false. RULES
-	 * 1. talet måste vara mellan 1 och 9. 2. Only one occurance of a number per
-	 * row || column 3. Only one occurance of a number within a region
+	 * INTE KLAR - TODO: Kolla region
+	 * 
 	 * Return true if the placement of a value is acceptable, else false. RULES 1. talet måste vara mellan 1 och 9. 2. Only one occurance of a number per row || column 3. Only one
 	 * occurance of a number within a region
 	 * 
@@ -64,30 +87,24 @@ public class SudokuModel {
 		return true;
 	}
 
-
-	/**
-	 * returns true if the given value is already found within the region
-	 * corresponding to the given row and column.
-	 * @param row
-	 * @param col
-	 * @param value
-	 * @return
-	 */
-	private boolean checkRegion(int row, int col, int value) {
-		int regionRow = (row / 3) * 3;
-		int regionCol = (col / 3) * 3;
-
-		for (int i = regionRow; i <= regionRow + 2; i++) {
-			for (int j = regionCol; j <= regionCol + 2; i++) {
-				if (nbrsMatrix[i][j] == value) {
-					return false;
-				}
-			}
-		}
-		return true;
+	public int getValue(int row, int col) {
+		return matrix[row][col].value;
 	}
-	
 
+	// Här försöker jag definiera en "Cell", en ny klass vi gör matrisen av så att den kan ha både värde och region
+	static class Cell {
+		int value = 0;
+		int region;
+
+		private Cell(int v, int r) {
+			this.value = v;
+			this.setRegion(r);
+		}
+
+		private void setRegion(int r) {
+			this.region = r;
+		}
+	}
 
 	/**
 	 * TEST METHOD Prints the matrix in console with VERY NICE layout and design
@@ -95,23 +112,18 @@ public class SudokuModel {
 	 */
 	public void printMatrix() {
 		System.out.println();
-		for (int i = 0; i < nbrsMatrix.length; i++) {
+		for (int i = 0; i < matrix.length; i++) {
 			if (i != 0 && (i % 3) == 0) {
 				System.out.print("----- + ----- + -----\n");
 			}
-			for (int j = 0; j < nbrsMatrix[i].length; j++) {
+			for (int j = 0; j < matrix[i].length; j++) {
 				if (j != 0 && (j % 3) == 0)
 					System.out.print("| ");
-				if (nbrsMatrix[i][j] == 0) { // Ta
-																		// bort
-																		// en av
-																		// dessa
-																		// senare
+				if (matrix[i][j] == null || matrix[i][j].value == 0) { // Ta bort en av dessa senare
 					System.out.print("□ ");
 				} else {
-					System.out.print(nbrsMatrix[i][j] + " ");
-					// System.out.print(matrix[i][j].region + " "); // TEST
-
+					System.out.print(matrix[i][j].value + " ");
+					//System.out.print(matrix[i][j].region + " "); // TEST
 				}
 			}
 			System.out.println();
