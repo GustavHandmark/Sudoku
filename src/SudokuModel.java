@@ -11,6 +11,11 @@ public class SudokuModel {
 		populateCells();
 	}
 
+	/**
+	 * Creates value=0, region=getRegion(i,j) Cells for all [9][9] of matrix[][] and
+	 * then links every cell to vectors in regionList[][]
+	 * 
+	 */
 	private void populateCells() {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -22,8 +27,9 @@ public class SudokuModel {
 				regionList[i][j] = matrix[((i / 3) * 3 + j / 3)][((i % 3) * 3 + j % 3)]; // FUNKAR, men måste vara i en
 																							// egen nested for-loop
 
-				System.out.println("regionList[" + i + "," + j + "] = matrix[" + ((i / 3) * 3 + j / 3) + "," // TEST
-						+ ((i % 3) * 3 + j % 3) + "] region:" + getRegion(i, j));
+				// System.out.println("regionList[" + i + "," + j + "] = matrix[" + ((i / 3) * 3
+				// + j / 3) + "," // TEST
+				// + ((i % 3) * 3 + j % 3) + "] region:" + getRegion(i, j));
 			}
 		}
 
@@ -39,9 +45,8 @@ public class SudokuModel {
 	 * @param column
 	 */
 	public void setValue(int value, int row, int column) {
-		// checkRules(value, row, column); // hur hanterar vi ifall denna returnar
-		// false?
-		matrix[row][column].value = value;
+		if (checkRules(value, row, column))
+			matrix[row][column].value = value;
 	}
 
 	private int getRegion(int row, int column) {
@@ -67,18 +72,25 @@ public class SudokuModel {
 			for (int i = 0; i < 9; i++) {
 				if (matrix[row][i] != null || matrix[i][column] != null) {
 					if (i != column && matrix[row][i].value == value) { // check row for duplicate
-						System.out.println("Detta värde finns redan på denna rad ");
+						System.out.println("Detta värde finns redan på denna rad: " + matrix[row][i].value);
 						return false;
 					} else if (i != row && matrix[i][column].value == value) {// check column for duplicate
-						System.out.println("Detta värde finns redan i denna kolumn ");
+						System.out.println("Detta värde finns redan i denna kolumn: " + matrix[i][column].value);
+						return false;
+					} else if (regionList[getRegion(row, column)][i].value == value) {// INTE KLAR, inget undantag för
+																						// sig själv
+						System.out.println(
+								"Detta värde finns redan i denna region: " + matrix[getRegion(row, column)][i].value);
 						return false;
 					}
 
 				}
 			}
 
-		} else
+		} else {
 			System.out.print("Value needs to be an integer between 1 and 9");
+			return false;
+		}
 
 		return true;
 	}
@@ -104,6 +116,7 @@ public class SudokuModel {
 	 * 
 	 */
 	public void printMatrix() {
+		System.out.println();
 		for (int i = 0; i < matrix.length; i++) {
 			if (i != 0 && (i % 3) == 0) {
 				System.out.print("----- + ----- + -----\n");
