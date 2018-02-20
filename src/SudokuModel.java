@@ -163,16 +163,10 @@ public class SudokuModel {
 			for (int j = 0; j < nbrsMatrix[i].length; j++) {
 				if (j != 0 && (j % 3) == 0)
 					System.out.print("| ");
-				if (nbrsMatrix[i][j] == 0) { // Ta
-												// bort
-												// en av
-												// dessa
-												// senare
+				if (nbrsMatrix[i][j] == 0) {
 					System.out.print("□ ");
 				} else {
 					System.out.print(nbrsMatrix[i][j] + " ");
-					// System.out.print(matrix[i][j].region + " "); // TEST
-
 				}
 			}
 			System.out.println();
