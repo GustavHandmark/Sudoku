@@ -1,11 +1,11 @@
 import java.util.*;
 
-public class SudokuModel {
+public class SudokuModel2BackupPreClassRemoval {
 	// matrix representing the sudoku grid.
 	private Cell[][] matrix;
 	private Cell[][] regionList;
 
-	public SudokuModel() {
+	public SudokuModel2BackupPreClassRemoval() {
 		matrix = new Cell[9][9];
 		regionList = new Cell[9][9];
 		populateCells();
@@ -24,6 +24,7 @@ public class SudokuModel {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				regionList[i][j] = matrix[((i / 3) * 3 + j / 3)][((i % 3) * 3 + j % 3)];
+
 				// TEST
 				System.out.println("regionList[" + i + "," + j + "] = matrix[" + ((i / 3) * 3 + j / 3) + "," + ((i % 3) * 3 + j % 3) + "]");
 			}
