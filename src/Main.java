@@ -17,7 +17,9 @@ public class Main {
 		sm.setValue(4, 3, 2);
 		sm.setValue(5, 8, 5);
 		sm.setValue(4, 4, 5);
+		System.out.println(sm.checkRules(8, 7, 5));
 
+		System.out.println(sm.getValue(8, 8));
 		sm.printMatrix();
 
 	}
