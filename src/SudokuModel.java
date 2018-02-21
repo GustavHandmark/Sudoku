@@ -95,9 +95,7 @@ public class SudokuModel {
 					if (solveSudoku(row, col + 1)) {
 						return true;
 					}
-
 				}
-
 			}
 		}
 		nbrsMatrix[row][col] = 0; //No candidate is possible, set to 0, return false and go back.
