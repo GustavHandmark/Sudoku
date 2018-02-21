@@ -1,3 +1,5 @@
+import static org.junit.Assert.assertTrue;
+
 import java.util.*;
 
 public class SudokuModel {
@@ -43,6 +45,13 @@ public class SudokuModel {
 		return nbrsMatrix;
 	}
 
+	public void clearMatrix() {
+		for (int r = 0; r < 9; r++) {
+			for (int c = 0; c < 9; c++)
+				nbrsMatrix[r][c] = 0; // Kan inte använda setValue då den inte accepterar 0
+		}
+	}
+
 	// todo -> documentation for method, same as below.
 	public boolean solveSudoku() {
 		return solveSudoku(0, 0);
@@ -70,7 +79,6 @@ public class SudokuModel {
 			} else {
 				return solveSudoku(row, col + 1);
 			}
-
 		}
 		// Empty cells, Recursively attemps to solve the sudoku.
 		for (int value = 1; value <= 9; value++) {

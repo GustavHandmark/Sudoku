@@ -50,5 +50,7 @@ public class Main {
 		sm.solveSudoku();
 		
 		sm.printMatrix();
+		sm.clearMatrix();
+		sm.printMatrix();
 	}
 }

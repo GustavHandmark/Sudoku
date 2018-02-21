@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
+
+
 public class SudokuTestCase {
 	SudokuModel sm;
 
@@ -65,6 +67,8 @@ public class SudokuTestCase {
 	 */
 	@Test
 	public final void testClear() {
+		sm.clearMatrix();
+		
 		for (int r = 0; r < 9; r++) {
 			for (int c = 0; c < 9; c++)
 				assertTrue("After: Invalid solution", sm.getValue(r, c) == 0);
