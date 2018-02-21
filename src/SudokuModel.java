@@ -10,17 +10,15 @@ public class SudokuModel {
 	public SudokuModel() {
 		nbrsMatrix = new int[9][9];
 	}
-	
-	public boolean checkMatrix(int[][] existing){
-		//Checker for importing a preexisting matrix, should match the criterias given by checkrules:
+
+	public boolean checkMatrix(int[][] existing) {
+		// Checker for importing a preexisting matrix, should match the criterias given by checkrules:
 		// so for each value in the imported matrix, call checkrules
 		// should be a 9 by 9 matrix, else throw illegalargumentexception
 		return false;
-		//when this returns false, the sudoku won't be possible to solve,
-		
+		// when this returns false, the sudoku won't be possible to solve,
+
 	}
-		
-	
 
 	/**
 	 * Sets the given value at the given position in the matrix
@@ -48,28 +46,24 @@ public class SudokuModel {
 	// todo -> documentation for method, same as below.
 	public boolean solveSudoku() {
 		return solveSudoku(0, 0);
-		
+
 	}
-
+	/**
+	 * Base case: if we are at the last row col and the inserted value is cleared by checkrules -> return true (sudoku solved)
+	 * 
+	 * else -> if there is not already an assigned value -> try inserting value 1 and clear by checkrules, if checkrules returns false -> increment value by one and try again until
+	 * a possible candidate is found, Go to the next cell and repeat.
+	 *
+	 * if no value (1-9) is a possible candidate, go back to the previous cell and try another possible candidate then repeat.
+	 * 
+	 * Where the sudoku has no solution, it is by error of the user (preexisting matrix or assigned values), hence this is checked before the method call for this recursive method.
+	 *
+	 * @param row
+	 * @param col
+	 * @return
+	 */
 	private boolean solveSudoku(int row, int col) {
-		/**
-		 * Base case: if we are at the last row col and the inserted value is
-		 * cleared by checkrules -> return true (sudoku solved)
-		 * 
-		 * else -> if there is not already an assigned value -> try inserting
-		 * value 1 and clear by checkrules, if checkrules returns false ->
-		 * increment value by one and try again until a possible candidate is
-		 * found, Go to the next cell and repeat.
-		 *
-		 * if no value (1-9) is a possible candidate, go back to the previous
-		 * cell and try another possible candidate then repeat.
-		 * 
-		 * Where the sudoku has no solution, it is by error of the user (preexisting matrix or assigned values),
-		 * hence this is checked before the method call for this recursive method.
-		 */
-
 		// Non-empty cell -> proceed to the next row-col.
-		
 		if (nbrsMatrix[row][col] > 0) {
 			if (col == 8) {
 				return solveSudoku(row + 1, 0);
@@ -78,9 +72,9 @@ public class SudokuModel {
 			}
 
 		}
-		// Empty cells, Recursively attemps to solve the sudoku. 
+		// Empty cells, Recursively attemps to solve the sudoku.
 		for (int value = 1; value <= 9; value++) {
-			if(row == 8 && col == 8 && checkRules(row,col,value)){ //Basecase - if we're at the last cell and the candidate number is possible -> sudoku is solved.
+			if (row == 8 && col == 8 && checkRules(row, col, value)) { // Basecase - if we're at the last cell and the candidate number is possible -> sudoku is solved.
 				nbrsMatrix[row][col] = value;
 				return true;
 			}
@@ -88,7 +82,7 @@ public class SudokuModel {
 				nbrsMatrix[row][col] = value;
 				if (col == 8) {
 					if (solveSudoku(row + 1, 0)) {
-						return true; 
+						return true;
 					}
 
 				} else {
@@ -98,15 +92,12 @@ public class SudokuModel {
 				}
 			}
 		}
-		nbrsMatrix[row][col] = 0; //No candidate is possible, set to 0, return false and go back.
+		nbrsMatrix[row][col] = 0; // No candidate is possible, set to 0, return false and go back.
 		return false;
 	}
 
-
-
 	/**
-	 * returns false if the given value interferes with any of the sudoku rules.
-	 * returns true if the given value is a possible candidate.
+	 * returns false if the given value interferes with any of the sudoku rules. returns true if the given value is a possible candidate.
 	 * 
 	 * @param row
 	 * @param col
@@ -114,19 +105,17 @@ public class SudokuModel {
 	 * @return
 	 */
 	public boolean checkRules(int row, int col, int value) {
-		/* Checks if the parameter value is permitted depending on the numbers
-		 * in the given row.
-		 * Should not return false when the parameter value is checked against itself
-		 */ 
+		/*
+		 * Checks if the parameter value is permitted depending on the numbers in the given row. Should not return false when the parameter value is checked against itself
+		 */
 		for (int i = 0; i < 9; i++) {
 			if (nbrsMatrix[row][i] == value && i != col) {
 				return false;
 			}
 		}
 
-		/* Checks if the value is permitted depending on the numbers in the
-		 * given column,
-		 * the parameter value should not return false.
+		/*
+		 * Checks if the value is permitted depending on the numbers in the given column, the parameter value should not return false.
 		 */
 		for (int i = 0; i < 9; i++) {
 			if (nbrsMatrix[i][col] == value && i != row) {
@@ -134,8 +123,8 @@ public class SudokuModel {
 			}
 		}
 
-		/* Checks if the value is permitted depending on the numbers in the
-		 * matrix region.
+		/*
+		 * Checks if the value is permitted depending on the numbers in the matrix region.
 		 */
 		int regionRow = (row / 3) * 3;
 		int regionCol = (col / 3) * 3;
