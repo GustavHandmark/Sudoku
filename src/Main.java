@@ -4,8 +4,10 @@ public class Main {
 	// Currently used for manual testing
 	public static void main(String[] args) {
 		SudokuModel sm = new SudokuModel();
+		SudokuModel dm =new SudokuModel();
 
-		//sm.solveSudoku();
+//		dm.solveSudoku();
+//		dm.printMatrix();
 		sm.setValue(8, 0, 2);
 		sm.setValue(1, 2, 0);
 		sm.setValue(2, 2, 2);
@@ -48,7 +50,7 @@ public class Main {
 //		System.out.println(sm.checkRules(8, 7, 5));
 		sm.printMatrix();
 		sm.solveSudoku();
-		
+		sm.solveSudoku();
 		sm.printMatrix();
 		sm.clearMatrix();
 		sm.printMatrix();

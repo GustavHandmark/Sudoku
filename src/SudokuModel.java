@@ -9,12 +9,11 @@ public class SudokuModel {
 	public SudokuModel() {
 		nbrsMatrix = new int[9][9];
 	}
-	
-	
+
 	private boolean checkMatrix() {
-		for (int i = 0; i < nbrsMatrix.length; i++) 
-			for (int j = 0; j < nbrsMatrix[i].length; j++) 
-				if(nbrsMatrix[i][j] != 0 && checkRules(i, j, nbrsMatrix[i][j])==false)
+		for (int i = 0; i < nbrsMatrix.length; i++)
+			for (int j = 0; j < nbrsMatrix[i].length; j++)
+				if (nbrsMatrix[i][j] != 0 && checkRules(i, j, nbrsMatrix[i][j]) == false)
 					return false;
 
 		return true;
@@ -58,10 +57,8 @@ public class SudokuModel {
 
 	// todo -> documentation for method, same as below.
 	public boolean solveSudoku() {
-		if(checkMatrix())
-			return solveSudoku(0, 0);
-		
-		return false;
+		return solveSudoku(0, 0);
+
 	}
 
 	/**
