@@ -121,9 +121,25 @@ public class SudokuTestCase {
 		} catch (Exception e) {
 			// successful test
 		}
+		assertTrue("After: Sudoku failed to solve", !sm.solveSudoku());
 		
 		
-
+		try {
+			sm.setValue(0, 4, 4);
+			fail("Should Exception");
+		} catch (Exception e) {
+			// successful test
+		}
+		assertTrue("After: Sudoku failed to solve", !sm.solveSudoku());
+		
+		try {
+			sm.setValue(10, 4, 4);
+			fail("Should Exception");
+		} catch (Exception e) {
+			// successful test
+		}
+		assertTrue("After: Sudoku failed to solve", !sm.solveSudoku());
+		
 	}
 
 }
