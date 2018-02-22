@@ -78,6 +78,9 @@ public class SudokuModel {
 	 */
 	private boolean solveSudoku(int row, int col) {
 		// Non-empty cell -> proceed to the next row-col.
+		if(row == 9){
+			return true;
+		}
 		if (nbrsMatrix[row][col] > 0) {
 			if (col == 8) {
 				return solveSudoku(row + 1, 0);
@@ -87,6 +90,7 @@ public class SudokuModel {
 		}
 		// Empty cells, Recursively attemps to solve the sudoku.
 		for (int value = 1; value <= 9; value++) {
+
 			if (row == 8 && col == 8 && checkRules(row, col, value)) { // Basecase - if we're at the last cell and the candidate number is possible -> sudoku is solved.
 				nbrsMatrix[row][col] = value;
 				return true;
