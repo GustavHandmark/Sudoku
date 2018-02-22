@@ -9,8 +9,12 @@ public class SudokuModel {
 	public SudokuModel() {
 		nbrsMatrix = new int[9][9];
 	}
-
-	public boolean checkMatrix() {
+	
+	/**
+	 * Checks if the given values in the given matrix already contains errors
+	 * If errors exists, the matrix won't be solveable
+	 */
+	public boolean checkMatrix() { 
 		for (int i = 0; i < nbrsMatrix.length; i++) {
 			for (int j = 0; j < nbrsMatrix[i].length; j++) {
 				if (nbrsMatrix[i][j] != 0 && checkRules(i, j, nbrsMatrix[i][j]) == false) {
