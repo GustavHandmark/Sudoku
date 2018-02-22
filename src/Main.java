@@ -50,8 +50,8 @@ public class Main {
 //		System.out.println(sm.checkRules(8, 7, 5));
 		sm.printMatrix();
 		sm.solveSudoku();
-		sm.solveSudoku();
 		sm.printMatrix();
+		System.out.println(sm.solveSudoku());
 		sm.clearMatrix();
 		sm.printMatrix();
 	}
