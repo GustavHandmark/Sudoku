@@ -78,7 +78,7 @@ public class SudokuModel {
 	 */
 	private boolean solveSudoku(int row, int col) {
 		// Non-empty cell -> proceed to the next row-col.
-		if(row == 9){
+		if (row == 9) {
 			return true;
 		}
 		if (nbrsMatrix[row][col] > 0) {
@@ -148,7 +148,7 @@ public class SudokuModel {
 		for (int i = regionRow; i <= regionRow + 2; i++) {
 			for (int j = regionCol; j <= regionCol + 2; j++) {
 				// The number which we're checking should not throw a false,
-				if (nbrsMatrix[i][j] == value && (regionRow + i) != row && (regionCol + j) != col) {
+				if (nbrsMatrix[i][j] == value && i != row && j != col) {
 					return false;
 				}
 			}

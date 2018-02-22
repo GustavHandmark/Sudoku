@@ -1,7 +1,6 @@
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import java.util.NoSuchElementException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -25,7 +24,7 @@ public class SudokuTestCase {
 	 */
 	@Test
 	public final void testSolveEmptySudoku() {
-		assertTrue("After: Invalid solution", !sm.solveSudoku());
+		assertTrue("After: Invalid solution", sm.solveSudoku());
 	}
 
 	/**
@@ -56,7 +55,7 @@ public class SudokuTestCase {
 		sm.setValue(6, 1, 2);
 
 		sm.setValue(7, 3, 3);
-		assertTrue("After: Incorrect Sudoku solveable", !sm.solveSudoku());
+		assertFalse("After: Incorrect Sudoku solveable", sm.solveSudoku());
 
 		sm.setValue(0, 3, 3);
 		assertTrue("After: Not solveable", sm.solveSudoku());
@@ -121,25 +120,24 @@ public class SudokuTestCase {
 		} catch (Exception e) {
 			// successful test
 		}
-		assertTrue("After: Sudoku failed to solve", !sm.solveSudoku());
-		
-		
+		assertTrue("After: Sudoku failed to solve", sm.solveSudoku());
+
 		try {
 			sm.setValue(0, 4, 4);
 			fail("Should Exception");
 		} catch (Exception e) {
 			// successful test
 		}
-		assertTrue("After: Sudoku failed to solve", !sm.solveSudoku());
-		
+		assertTrue("After: Sudoku failed to solve", sm.solveSudoku());
+
 		try {
 			sm.setValue(10, 4, 4);
 			fail("Should Exception");
 		} catch (Exception e) {
 			// successful test
 		}
-		assertTrue("After: Sudoku failed to solve", !sm.solveSudoku());
-		
+		assertTrue("After: Sudoku failed to solve", sm.solveSudoku());
+
 	}
 
 }
