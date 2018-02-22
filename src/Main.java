@@ -47,12 +47,12 @@ public class Main {
 
 
 		// testar reglerna
-//		System.out.println(sm.checkRules(8, 7, 5));
+		System.out.println("=== BASE SUDOKU ===");
 		sm.printMatrix();
 		sm.solveSudoku();
 		sm.solveSudoku();
-		sm.printMatrix();
-		sm.clearMatrix();
+
+		System.out.println("=== SOLVED SUDOKU ===");
 		sm.printMatrix();
 	}
 }
