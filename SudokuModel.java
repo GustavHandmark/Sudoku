@@ -1,12 +1,13 @@
+package com.example.sudokuandroid;
 
 public class SudokuModel {
 	// matrix representing the sudoku grid.
 	private int[][] nbrsMatrix;
-
 	/**
 	 * Creates an empty Sudoku
 	 */
 	public SudokuModel() {
+
 		nbrsMatrix = new int[9][9];
 	}
 	
