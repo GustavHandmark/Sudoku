@@ -13,7 +13,7 @@ public class Main {
 		dm.setValue(4, 1, 0);
 		dm.setValue(5, 1, 1);
 		dm.setValue(6, 1, 2);
-		dm.setValue(7, 3, 3);
+		dm.setValue(7, 2, 3);
 		
 		
 		sm.setValue(8, 0, 2);
@@ -57,6 +57,10 @@ public class Main {
 		// testar reglerna
 		dm.solveSudoku();
 		dm.printMatrix();
+		System.out.println(dm.solveSudoku());
+		System.out.println(dm.checkMatrix());
+
+		System.out.println("------------------");
 		
 		sm.printMatrix();
 		System.out.println(sm.checkMatrix());
