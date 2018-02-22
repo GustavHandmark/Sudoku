@@ -41,6 +41,10 @@ public class SudokuModel {
 		}
 	}
 
+	public void clearValue(int row, int col) {
+		nbrsMatrix[row][col] = 0;
+	}
+
 	public int getValue(int row, int col) {
 		return nbrsMatrix[row][col];
 	}
@@ -67,13 +71,12 @@ public class SudokuModel {
 	/**
 	 * Base case: if we are at the last row col and the inserted value is cleared by checkrules -> return true (sudoku solved)
 	 * 
-	 * else -> if there is not already an assigned value -> try inserting value 1 and clear by checkrules, if checkrules returns false -> increment value by one
-	 * and try again until a possible candidate is found, Go to the next cell and repeat.
+	 * else -> if there is not already an assigned value -> try inserting value 1 and clear by checkrules, if checkrules returns false -> increment value by one and try again until
+	 * a possible candidate is found, Go to the next cell and repeat.
 	 *
 	 * if no value (1-9) is a possible candidate, go back to the previous cell and try another possible candidate then repeat.
 	 * 
-	 * Where the sudoku has no solution, it is by error of the user (preexisting matrix or assigned values), hence this is checked before the method call for
-	 * this recursive method.
+	 * Where the sudoku has no solution, it is by error of the user (preexisting matrix or assigned values), hence this is checked before the method call for this recursive method.
 	 *
 	 * @param row
 	 * @param col
@@ -127,8 +130,7 @@ public class SudokuModel {
 	 */
 	public boolean checkRules(int row, int col, int value) {
 		/*
-		 * Checks if the parameter value is permitted depending on the numbers in the given row. Should not return false when the parameter value is checked
-		 * against itself
+		 * Checks if the parameter value is permitted depending on the numbers in the given row. Should not return false when the parameter value is checked against itself
 		 */
 		for (int i = 0; i < 9; i++) {
 			if (nbrsMatrix[row][i] == value && i != col) {
