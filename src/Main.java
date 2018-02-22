@@ -47,7 +47,6 @@ public class Main {
 
 
 		// testar reglerna
-//		System.out.println(sm.checkRules(8, 7, 5));
 		sm.printMatrix();
 		System.out.println(sm.checkMatrix());
 		System.out.println(sm.solveSudoku());
