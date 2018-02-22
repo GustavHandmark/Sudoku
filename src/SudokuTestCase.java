@@ -107,8 +107,9 @@ public class SudokuTestCase {
 		sm.setValue(3, 7, 4);
 		sm.setValue(1, 7, 6);
 		sm.setValue(4, 8, 6);
-
-		assertTrue("After: Sudoku failed to solve", sm.solveSudoku());
+		System.out.println(sm.solveSudoku());
+		assertTrue(sm.solveSudoku());
+//		assertTrue("After: Sudoku failed to solve", sm.solveSudoku());
 
 	}
 
