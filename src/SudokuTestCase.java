@@ -3,6 +3,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 3d9089de77ee65c46d147f83e1b1a2d5f269dad7
 
 public class SudokuTestCase {
 	SudokuModel sm;
