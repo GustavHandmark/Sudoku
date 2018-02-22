@@ -47,10 +47,9 @@ public class Main {
 		// testar reglerna
 //		System.out.println(sm.checkRules(8, 7, 5));
 		sm.printMatrix();
-		sm.solveSudoku();
+		System.out.println(sm.solveSudoku());
 		
-		sm.printMatrix();
-		sm.clearMatrix();
+		
 		sm.printMatrix();
 	}
 }
