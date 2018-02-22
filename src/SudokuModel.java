@@ -54,8 +54,10 @@ public class SudokuModel {
 
 	// todo -> documentation for method, same as below.
 	public boolean solveSudoku() {
-		return solveSudoku(0, 0);
-
+		if (!checkMatrix(nbrsMatrix))//Ta bort ! senare
+			return solveSudoku(0, 0);
+		else
+			return false;
 	}
 	/**
 	 * Base case: if we are at the last row col and the inserted value is cleared by checkrules -> return true (sudoku solved)

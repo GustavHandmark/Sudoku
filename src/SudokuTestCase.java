@@ -2,9 +2,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
-
-
+import org.junit.Test;
 
 public class SudokuTestCase {
 	SudokuModel sm;
@@ -24,7 +22,7 @@ public class SudokuTestCase {
 	 */
 	@Test
 	public final void testSolveEmptySudoku() {
-		assertTrue("After: Invalid solution", sm.solveSudoku());
+		assertTrue("After: Invalid solution", !sm.solveSudoku());
 	}
 
 	/**
@@ -34,15 +32,15 @@ public class SudokuTestCase {
 	public void testUnsovableSudoku() {
 		sm.setValue(5, 0, 0);
 		sm.setValue(5, 0, 1);
-		assertTrue("After: ", sm.solveSudoku());
+		assertTrue("After: Invalid Sudoku was solved - row", !sm.solveSudoku());
 
 		sm.setValue(5, 0, 0);
 		sm.setValue(5, 1, 0);
-		assertTrue("After: ", sm.solveSudoku());
+		assertTrue("After: Invalid Sudoku was solved - column", !sm.solveSudoku());
 
 		sm.setValue(5, 0, 0);
 		sm.setValue(5, 1, 1);
-		assertTrue("After: ", sm.solveSudoku());
+		assertTrue("After: Invalid Sudoku was solved - region", !sm.solveSudoku());
 	}
 
 	@Test
@@ -68,7 +66,7 @@ public class SudokuTestCase {
 	@Test
 	public final void testClear() {
 		sm.clearMatrix();
-		
+
 		for (int r = 0; r < 9; r++) {
 			for (int c = 0; c < 9; c++)
 				assertTrue("After: Invalid solution", sm.getValue(r, c) == 0);
