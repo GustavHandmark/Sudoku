@@ -40,11 +40,11 @@ public class SudokuModel {
 			throw new IllegalArgumentException("Value needs to be an integer between (and including) 1 and 9");
 		}
 	}
-
 	public int getValue(int row, int col) {
 		return nbrsMatrix[row][col];
 	}
-
+	
+	
 	public int[][] getMatrix() {
 		return nbrsMatrix;
 	}
