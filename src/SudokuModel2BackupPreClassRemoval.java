@@ -1,4 +1,3 @@
-import java.util.*;
 
 public class SudokuModel2BackupPreClassRemoval {
 	// matrix representing the sudoku grid.
