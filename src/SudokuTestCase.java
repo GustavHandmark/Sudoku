@@ -57,7 +57,7 @@ public class SudokuTestCase {
 		sm.setValue(7, 2, 3);
 		assertFalse("After: Incorrect Sudoku solveable", sm.solveSudoku());
 
-		sm.clearValue(3, 3);
+		sm.clearValue(2, 3);
 		assertTrue("After: Not solveable", sm.solveSudoku());
 
 	}
