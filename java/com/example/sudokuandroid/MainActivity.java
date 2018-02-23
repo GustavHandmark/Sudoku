@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.GridView;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_solve:
-                a.printmatrix();
                 a.solveSudoku();
                 a.notifyDataSetChanged();
                 gridview.setAdapter(a);

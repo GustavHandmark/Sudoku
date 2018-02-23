@@ -1,12 +1,19 @@
 package com.example.sudokuandroid;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.IdRes;
+import android.text.InputType;
+import android.text.Layout;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -30,6 +37,9 @@ public class SudokuAdapter extends BaseAdapter {
         for (int i = 0; i < sm.getMatrix().length; i++) {
             for (int j = 0; j < sm.getMatrix()[i].length; j++) {
                 EditText box = new EditText(mContext);
+                box.setBackgroundResource(R.drawable.rectangle);
+                box.setInputType(InputType.TYPE_CLASS_NUMBER);
+                box.setGravity(Gravity.CENTER);
                 String s = String.valueOf(sm.getMatrix()[i][j]);
                 box.setText(String.valueOf(sm.getMatrix()[i][j]));
                 if(s.equalsIgnoreCase("0")){
@@ -49,13 +59,8 @@ public class SudokuAdapter extends BaseAdapter {
      *
      * @return
      */
-    public void printmatrix() {
-        for (int i = 0; i < sudokuMatrix.length; i++) {
-            for (int j = 0; j < sudokuMatrix[i].length; j++) {
-                System.out.println(sudokuMatrix[i][j].getText().toString());
-            }
-        }
-    }
+
+
     public SudokuModel getSudoku(){
         return sm;
     }
@@ -128,14 +133,27 @@ public class SudokuAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         EditText et;
         if(convertView == null){
-            int row;
-            int col;
             et = new EditText(mContext);
 
+            int row;
+            int col;
+
+            //There must be a better way to do this, fml
             if(position <=80) {
                 row = position / 9;
                 col = position % 9;
-                return sudokuMatrix[row][col];
+                et = sudokuMatrix[row][col];
+                if(position<3){
+                    et.setBackgroundResource(R.drawable.rectangle_dark);
+                }
+
+                if(position>8 && position <12){
+                    et.setBackgroundResource(R.drawable.rectangle_dark);
+                }
+                if(position>17 && position <21){
+                    et.setBackgroundResource(R.drawable.rectangle_dark);
+                }
+                return et;
             }
         } else {
             et = (EditText) convertView;

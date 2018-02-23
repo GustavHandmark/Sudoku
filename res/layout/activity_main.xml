@@ -8,18 +8,16 @@
         android:id="@+id/gridview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:footerDividersEnabled="false"
-        android:padding="1dp"
-        android:numColumns="9" >
+        android:horizontalSpacing="0dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="0dp"
+        android:numColumns="9"
+        android:paddingBottom="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+     />
 
-    </GridView>
-
-    <EditText
-        android:id = "@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        />
 
 
 </LinearLayout>
