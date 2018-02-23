@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.GridView;
 
 public class MainActivity extends AppCompatActivity {
-    //This is probably bad practice, put the onoptionsselected somewhere else?
     private SudokuAdapter a;
     GridView gridview;
 
