@@ -77,7 +77,7 @@ public class SudokuAdapter extends BaseAdapter {
 
     public void clear() {
         for (int i = 0; i < sudokuMatrix.length; i++) {
-            for (int j = 0; j < sudokuMatrix[i].length; i++) {
+            for (int j = 0; j < sudokuMatrix[i].length; j++) {
                 sudokuMatrix[i][j].setText("");
             }
         }
