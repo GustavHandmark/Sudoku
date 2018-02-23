@@ -30,7 +30,13 @@ public class SudokuAdapter extends BaseAdapter {
         for (int i = 0; i < sm.getMatrix().length; i++) {
             for (int j = 0; j < sm.getMatrix()[i].length; j++) {
                 EditText box = new EditText(mContext);
+                String s = String.valueOf(sm.getMatrix()[i][j]);
                 box.setText(String.valueOf(sm.getMatrix()[i][j]));
+                if(s.equalsIgnoreCase("0")){
+                    box.setText("");
+                } else{
+                    box.setText(String.valueOf(sm.getMatrix()[i][j]));
+                }
                 sudokuMatrix[i][j] = box;
             }
         }
@@ -50,15 +56,19 @@ public class SudokuAdapter extends BaseAdapter {
             }
         }
     }
+    public SudokuModel getSudoku(){
+        return sm;
+    }
+
     public boolean updateSudoku() {
         try {
             for (int i = 0; i < sudokuMatrix.length; i++) {
-                for (int j = 0; j < sudokuMatrix[i].length; i++) {
+                for (int j = 0; j < sudokuMatrix[i].length; j++) {
                     String s = sudokuMatrix[i][j].getText().toString();
                     try {
                         sm.setValue(Integer.parseInt(s), i, j);
                     } catch (IllegalArgumentException t) {
-                        return false;
+                        sm.clearValue(i,j);
                     }
 
                 }
@@ -71,7 +81,14 @@ public class SudokuAdapter extends BaseAdapter {
 
     public void solveSudoku() {
         updateSudoku();
-        sm.solveSudoku();
+        Boolean check = sm.solveSudoku();
+        if(check == false){
+            System.out.println("Användarinmatningsfel");
+        }
+        if(check == true){
+            System.out.println("Funkade");
+        }
+
         updateEditTextMatrix();
     }
 
@@ -95,7 +112,12 @@ public class SudokuAdapter extends BaseAdapter {
         return c;
     }
 
-    public Object getItem(int row) {
+    public Object getItem(int position) {
+        int row=position/9;
+        int col=position%9;
+        if(position<=80){
+            return sudokuMatrix[row][col];
+        }
         return null;
     }
 
@@ -106,11 +128,15 @@ public class SudokuAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         EditText et;
         if(convertView == null){
+            int row;
+            int col;
             et = new EditText(mContext);
-            et.setText(sudokuMatrix[0][0].getText());
 
-
-
+            if(position <=80) {
+                row = position / 9;
+                col = position % 9;
+                return sudokuMatrix[row][col];
+            }
         } else {
             et = (EditText) convertView;
         };
