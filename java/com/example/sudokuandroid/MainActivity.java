@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         solveItem = findViewById(R.id.action_solve);
 
         sudokuModel.setValue(2,0,0);
+        a.updateEditTextMatrix();
 
         gridview.setAdapter(a);
         a.printmatrix();
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_solve:
                 //add code calling solve.
+                a.solveSudoku();
                 return true;
 
             default:
