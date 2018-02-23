@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 
 public class MainActivity extends AppCompatActivity {
+    //prob bad practice
     private SudokuAdapter a;
     GridView gridview;
 
