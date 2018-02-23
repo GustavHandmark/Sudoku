@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
+
 /**
  * Created by gusta on 2/22/2018.
  */
@@ -25,9 +26,9 @@ public class SudokuAdapter extends BaseAdapter {
 
     }
 
-    public void updateEditTextMatrix(){
+    public void updateEditTextMatrix() {
         for (int i = 0; i < sm.getMatrix().length; i++) {
-            for (int j = 0; j < sm.getMatrix()[i].length; i++) {
+            for (int j = 0; j < sm.getMatrix()[i].length; j++) {
                 EditText box = new EditText(mContext);
                 box.setText(String.valueOf(sm.getMatrix()[i][j]));
                 sudokuMatrix[i][j] = box;
@@ -35,20 +36,28 @@ public class SudokuAdapter extends BaseAdapter {
         }
 
     }
+
     /**
      * Updates the sudokuMatrix, returns true if successful,
      * returns false if any of the numbers inserted is not an integer between 1 to 9
      *
      * @return
      */
+    public void printmatrix() {
+        for (int i = 0; i < sudokuMatrix.length; i++) {
+            for (int j = 0; j < sudokuMatrix[i].length; j++) {
+                System.out.println(sudokuMatrix[i][j].getText().toString());
+            }
+        }
+    }
     public boolean updateSudoku() {
         try {
             for (int i = 0; i < sudokuMatrix.length; i++) {
                 for (int j = 0; j < sudokuMatrix[i].length; i++) {
                     String s = sudokuMatrix[i][j].getText().toString();
-                    try{
-                        sm.setValue(Integer.parseInt(s),i,j);
-                    } catch (IllegalArgumentException t){
+                    try {
+                        sm.setValue(Integer.parseInt(s), i, j);
+                    } catch (IllegalArgumentException t) {
                         return false;
                     }
 
@@ -76,7 +85,14 @@ public class SudokuAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return sudokuMatrix.length;
+        int c = 0;
+        for (int i = 0; i < sudokuMatrix.length; i++) {
+            for (int j = 0; j < sudokuMatrix[i].length; j++) {
+                c++;
+            }
+
+        }
+        return c;
     }
 
     public Object getItem(int row) {
@@ -88,7 +104,18 @@ public class SudokuAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        return sudokuMatrix[0][0];
+        EditText et;
+        if(convertView == null){
+            et = new EditText(mContext);
+            et.setText(sudokuMatrix[0][0].getText());
+
+
+
+        } else {
+            et = (EditText) convertView;
+        };
+        return et;
+
 
     }
 
