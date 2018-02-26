@@ -123,17 +123,11 @@ public class SudokuAdapter extends BaseAdapter {
         }
     }
 
-    public void solveSudoku() {
+    public boolean solveSudoku() {
         updateSudoku();
         Boolean check = sm.solveSudoku();
-        if (check == false) {
-            System.out.println("Användarinmatningsfel");
-        }
-        if (check == true) {
-            System.out.println("Funkade");
-        }
-
         updateEditTextMatrix();
+        return check;
     }
 
     public void clear() {
@@ -174,35 +168,33 @@ public class SudokuAdapter extends BaseAdapter {
         if (convertView == null) {
             et = new EditText(mContext);
 
-            int row;
-            int col;
-
-            //There must be a better way to do this, fml
-            if (position <= 80) {
-                row = position / 9;
-                col = position % 9;
-                et = sudokuMatrix[row][col];
-                if (position < 3) {
-                    et.setBackgroundResource(R.drawable.rectangle_dark);
-
-                }
-
-                if (position > 8 && position < 12) {
-                    et.setBackgroundResource(R.drawable.rectangle_dark);
-                }
-                if (position > 17 && position < 21) {
-                    et.setBackgroundResource(R.drawable.rectangle_dark);
-                }
-                return et;
-            }
         } else {
             et = (EditText) convertView;
         }
         ;
+
+        int row;
+        int col;
+
+        if (position <= 80) {
+            row = position / 9;
+            col = position % 9;
+            et = sudokuMatrix[row][col];
+            et.setSelection(et.getText().length());
+            if (position < 3) {
+                et.setBackgroundResource(R.drawable.rectangle_dark);
+            }
+
+            if (position > 8 && position < 12) {
+                et.setBackgroundResource(R.drawable.rectangle_dark);
+            }
+            if (position > 17 && position < 21) {
+                et.setBackgroundResource(R.drawable.rectangle_dark);
+            }
+
+
+        }
+
         return et;
-
-
     }
-
-
 }
