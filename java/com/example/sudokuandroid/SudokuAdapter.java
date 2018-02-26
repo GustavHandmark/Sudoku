@@ -145,6 +145,7 @@ public class SudokuAdapter extends BaseAdapter {
                 et = sudokuMatrix[row][col];
                 if(position<3){
                     et.setBackgroundResource(R.drawable.rectangle_dark);
+
                 }
 
                 if(position>8 && position <12){
