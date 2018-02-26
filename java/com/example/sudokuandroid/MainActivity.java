@@ -1,7 +1,10 @@
 package com.example.sudokuandroid;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -26,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         SudokuModel sudokuModel = new SudokuModel();
         a = new SudokuAdapter(this, sudokuModel);
         gridview = findViewById(R.id.gridview);
-        gridview.setVerticalScrollBarEnabled(false);
         gridview.setAdapter(a);
     }
 
@@ -57,15 +59,21 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_solve:
                 hideKeyboard();
                 Boolean solved = a.solveSudoku();
-                if(solved){
-                    System.out.println("Fungerar att lösa matrisen");
+                if(!solved){
+                    AlertDialog alertDialog= new AlertDialog.Builder(this).create();
+                    alertDialog.setTitle("Sudoku cannot be solved");
+                    alertDialog.setMessage("The sudoku cannot be solved, no solution exists."+"\n"+"\n"+"Check the input values and try again");
+                    alertDialog.setButton(Dialog.BUTTON_POSITIVE,"OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which){
+                            dialog.cancel();
+                        }
+                    });
+                    alertDialog.show();
                 }
-                else{
-                    System.out.println("Gick ej att lösa");
-                }
+
                 a.notifyDataSetChanged();
                 gridview.setAdapter(a);
-                return solved;
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
