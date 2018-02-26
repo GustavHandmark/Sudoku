@@ -7,7 +7,10 @@ import android.support.annotation.IdRes;
 import android.text.InputType;
 import android.text.Layout;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
@@ -17,6 +20,8 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.text.InputFilter;
+
+import java.lang.reflect.Field;
 
 
 /**
@@ -39,12 +44,14 @@ public class SudokuAdapter extends BaseAdapter {
     public void updateEditTextMatrix() {
         for (int i = 0; i < sm.getMatrix().length; i++) {
             for (int j = 0; j < sm.getMatrix()[i].length; j++) {
+
                 EditText box = new EditText(mContext);
                 box.setBackgroundResource(R.drawable.rectangle);
                 box.setInputType(InputType.TYPE_CLASS_NUMBER);
                 box.setGravity(Gravity.CENTER);
-
+                box.setTextColor(Color.BLACK);
                 box.setFilters(new InputFilter[]{new InputFilterMinMax(1, 9)});
+                box.setCursorVisible(false);
 
                 String s = String.valueOf(sm.getMatrix()[i][j]);
                 box.setText(String.valueOf(sm.getMatrix()[i][j]));
