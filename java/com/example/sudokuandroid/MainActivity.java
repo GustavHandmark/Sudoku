@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             int col = rand.nextInt(9);
             int regionRow = (row / 3) * 3;
             int regionCol = (col / 3) * 3;
-            int color = Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+            int color = Color.rgb(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
             for (int i = regionRow; i <= regionRow + 2; i++) {
                 for (int j = regionCol; j <= regionCol + 2; j++) {
                     EditText etemp = a.getSudokuMatrix()[i][j];
