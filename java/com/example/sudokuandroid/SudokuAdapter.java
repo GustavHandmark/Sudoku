@@ -42,9 +42,9 @@ public class SudokuAdapter extends BaseAdapter {
                 box.setGravity(Gravity.CENTER);
                 String s = String.valueOf(sm.getMatrix()[i][j]);
                 box.setText(String.valueOf(sm.getMatrix()[i][j]));
-                if(s.equalsIgnoreCase("0")){
+                if (s.equalsIgnoreCase("0")) {
                     box.setText("");
-                } else{
+                } else {
                     box.setText(String.valueOf(sm.getMatrix()[i][j]));
                 }
                 sudokuMatrix[i][j] = box;
@@ -61,7 +61,7 @@ public class SudokuAdapter extends BaseAdapter {
      */
 
 
-    public SudokuModel getSudoku(){
+    public SudokuModel getSudoku() {
         return sm;
     }
 
@@ -73,7 +73,7 @@ public class SudokuAdapter extends BaseAdapter {
                     try {
                         sm.setValue(Integer.parseInt(s), i, j);
                     } catch (IllegalArgumentException t) {
-                        sm.clearValue(i,j);
+                        sm.clearValue(i, j);
                     }
 
                 }
@@ -84,17 +84,11 @@ public class SudokuAdapter extends BaseAdapter {
         }
     }
 
-    public void solveSudoku() {
+    public boolean solveSudoku() {
         updateSudoku();
         Boolean check = sm.solveSudoku();
-        if(check == false){
-            System.out.println("Användarinmatningsfel");
-        }
-        if(check == true){
-            System.out.println("Funkade");
-        }
-
         updateEditTextMatrix();
+        return check;
     }
 
     public void clear() {
@@ -118,9 +112,9 @@ public class SudokuAdapter extends BaseAdapter {
     }
 
     public Object getItem(int position) {
-        int row=position/9;
-        int col=position%9;
-        if(position<=80){
+        int row = position / 9;
+        int col = position % 9;
+        if (position <= 80) {
             return sudokuMatrix[row][col];
         }
         return null;
@@ -132,37 +126,34 @@ public class SudokuAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         EditText et;
-        if(convertView == null){
+        if (convertView == null) {
             et = new EditText(mContext);
 
-            int row;
-            int col;
-
-            //There must be a better way to do this, fml
-            if(position <=80) {
-                row = position / 9;
-                col = position % 9;
-                et = sudokuMatrix[row][col];
-                if(position<3){
-                    et.setBackgroundResource(R.drawable.rectangle_dark);
-
-                }
-
-                if(position>8 && position <12){
-                    et.setBackgroundResource(R.drawable.rectangle_dark);
-                }
-                if(position>17 && position <21){
-                    et.setBackgroundResource(R.drawable.rectangle_dark);
-                }
-                return et;
-            }
         } else {
             et = (EditText) convertView;
-        };
+        }
+        ;
+
+        int row;
+        int col;
+
+        if (position <= 80) {
+            row = position / 9;
+            col = position % 9;
+            et = sudokuMatrix[row][col];
+            if (position < 3) {
+                et.setBackgroundResource(R.drawable.rectangle_dark);
+            }
+
+            if (position > 8 && position < 12) {
+                et.setBackgroundResource(R.drawable.rectangle_dark);
+            }
+            if (position > 17 && position < 21) {
+                et.setBackgroundResource(R.drawable.rectangle_dark);
+            }
+
+        }
+
         return et;
-
-
     }
-
-
 }
