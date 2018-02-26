@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,6 +45,7 @@ public class SudokuAdapter extends BaseAdapter {
                 box.setInputType(InputType.TYPE_CLASS_NUMBER);
                 box.setGravity(Gravity.CENTER);
 
+                //Checks if value is in inside interval
                 box.setFilters(new InputFilter[]{new InputFilterMinMax(1, 9)});
 
                 String s = String.valueOf(sm.getMatrix()[i][j]);
@@ -57,6 +59,7 @@ public class SudokuAdapter extends BaseAdapter {
             }
         }
     }
+
 
     /**
      * Implements a "filter" that only allows values between 1 and 9. Called every time a EditText-box is updated
@@ -72,6 +75,7 @@ public class SudokuAdapter extends BaseAdapter {
 
         @Override
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+
             //noinspection EmptyCatchBlock
             try {
                 int input = Integer.parseInt(dest.subSequence(0, dstart).toString() + source + dest.subSequence(dend, dest.length()));
