@@ -171,7 +171,7 @@ public class SudokuAdapter extends BaseAdapter {
         } else {
             et = (EditText) convertView;
         }
-        ;
+
 
         int row;
         int col;
@@ -181,17 +181,11 @@ public class SudokuAdapter extends BaseAdapter {
             col = position % 9;
             et = sudokuMatrix[row][col];
             et.setSelection(et.getText().length());
-            if (position < 3) {
+            int curRegion = ((row/3)+(col/3));
+            System.out.println(curRegion);
+            if ( curRegion == 0 || curRegion == 2 || curRegion == 4 || curRegion == 6 || curRegion == 8 ) {
                 et.setBackgroundResource(R.drawable.rectangle_dark);
             }
-
-            if (position > 8 && position < 12) {
-                et.setBackgroundResource(R.drawable.rectangle_dark);
-            }
-            if (position > 17 && position < 21) {
-                et.setBackgroundResource(R.drawable.rectangle_dark);
-            }
-
 
         }
 
