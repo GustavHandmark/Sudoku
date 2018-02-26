@@ -1,5 +1,6 @@
 package com.example.sudokuandroid;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -16,12 +17,16 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.text.InputFilter;
 
 import java.lang.reflect.Field;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -32,6 +37,8 @@ public class SudokuAdapter extends BaseAdapter {
     private Context mContext;
     private SudokuModel sm;
     private EditText[][] sudokuMatrix = new EditText[9][9];
+    private boolean discoStarted = false;
+    private Timer timer;
 
     public SudokuAdapter(Context c, SudokuModel sm) {
         mContext = c;
@@ -40,16 +47,16 @@ public class SudokuAdapter extends BaseAdapter {
 
     }
 
+    public EditText[][] getSudokuMatrix(){
+        return sudokuMatrix;
+    }
 
     public void updateEditTextMatrix() {
         for (int i = 0; i < sm.getMatrix().length; i++) {
             for (int j = 0; j < sm.getMatrix()[i].length; j++) {
-
                 EditText box = new EditText(mContext);
-                box.setBackgroundResource(R.drawable.rectangle);
                 box.setInputType(InputType.TYPE_CLASS_NUMBER);
                 box.setGravity(Gravity.CENTER);
-                box.setTextColor(Color.BLACK);
                 box.setFilters(new InputFilter[]{new InputFilterMinMax(1, 9)});
                 box.setCursorVisible(false);
 
@@ -60,10 +67,18 @@ public class SudokuAdapter extends BaseAdapter {
                 } else {
                     box.setText(String.valueOf(sm.getMatrix()[i][j]));
                 }
+
+                int curRegion = ((i / 3) + (j / 3));
+                if (curRegion == 0 || curRegion == 2 || curRegion == 4 || curRegion == 6 || curRegion == 8) {
+                    box.setBackgroundResource(R.drawable.rectangle_dark);
+                } else {
+                    box.setBackgroundResource(R.drawable.rectangle);
+                }
                 sudokuMatrix[i][j] = box;
             }
         }
     }
+
 
     /**
      * Implements a "filter" that only allows values between 1 and 9. Called every time a EditText-box is updated
@@ -79,6 +94,7 @@ public class SudokuAdapter extends BaseAdapter {
 
         @Override
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+
             //noinspection EmptyCatchBlock
             try {
                 int input = Integer.parseInt(dest.subSequence(0, dstart).toString() + source + dest.subSequence(dend, dest.length()));
@@ -174,7 +190,7 @@ public class SudokuAdapter extends BaseAdapter {
         } else {
             et = (EditText) convertView;
         }
-        ;
+
 
         int row;
         int col;
@@ -184,17 +200,11 @@ public class SudokuAdapter extends BaseAdapter {
             col = position % 9;
             et = sudokuMatrix[row][col];
             et.setSelection(et.getText().length());
-            if (position < 3) {
-                et.setBackgroundResource(R.drawable.rectangle_dark);
-            }
-
-            if (position > 8 && position < 12) {
-                et.setBackgroundResource(R.drawable.rectangle_dark);
-            }
-            if (position > 17 && position < 21) {
-                et.setBackgroundResource(R.drawable.rectangle_dark);
-            }
-
+//            int curRegion = ((row / 3) + (col / 3));
+//            System.out.println(curRegion);
+//            if (curRegion == 0 || curRegion == 2 || curRegion == 4 || curRegion == 6 || curRegion == 8) {
+//                et.setBackgroundResource(R.drawable.rectangle_dark);
+//            }
 
         }
 
