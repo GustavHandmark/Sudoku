@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             int col = rand.nextInt(9);
             int regionRow = (row / 3) * 3;
             int regionCol = (col / 3) * 3;
-            int color = Color.rgb(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+            int color = Color.rgb(rand.nextInt(200)+56, rand.nextInt(200)+56, rand.nextInt(200)+56);
             for (int i = regionRow; i <= regionRow + 2; i++) {
                 for (int j = regionCol; j <= regionCol + 2; j++) {
                     EditText etemp = a.getSudokuMatrix()[i][j];
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             hand.postDelayed(this,50);
-            hand.postDelayed(runnable2,350);
+            //hand.postDelayed(runnable2,350);
         }
     };
 
