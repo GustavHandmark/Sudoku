@@ -133,14 +133,11 @@ public class MainActivity extends AppCompatActivity {
             Random rand = new Random();
             int row = rand.nextInt(9);
             int col = rand.nextInt(9);
-            int regionRow = (row / 3) * 3;
-            int regionCol = (col / 3) * 3;
-            for (int i = regionRow; i <= regionRow + 2; i++) {
-                for (int j = regionCol; j <= regionCol + 2; j++) {
-                    EditText etemp = a.getSudokuMatrix()[i][j];
-                    etemp.setBackgroundColor(Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
+            for (int i = 0; i <= 9; i++) {
+                    EditText etemp = a.getSudokuMatrix()[row][col];
+                    etemp.setBackgroundColor(Color.argb(255, rand.nextInt(156)+100, rand.nextInt(156)+100, rand.nextInt(156))+100);
                 }
             }
-        }
-    };
-}
+        };
+    }
+
