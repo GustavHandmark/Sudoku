@@ -53,11 +53,6 @@ public class SudokuModel {
 	public int getValue(int row, int col) {
 		return nbrsMatrix[row][col];
 	}
-	
-	
-	public int[][] getMatrix() {
-		return nbrsMatrix;
-	}
 
 	public void clearMatrix() {
 		for (int r = 0; r < 9; r++) {
