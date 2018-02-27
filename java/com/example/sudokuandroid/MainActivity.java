@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_disco:
                 if (!discoStarted) {
-                    hand.postDelayed(runnable,30);
+                    hand.postDelayed(runnable,20);
                     discoStarted = true;
 
                 } else {
@@ -122,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
                     etemp.setBackgroundColor(color);
                 }
             }
-            hand.postDelayed(this,50);
-            //hand.postDelayed(runnable2,350);
+            hand.postDelayed(this,30);
+            hand.postDelayed(runnable2,50);
         }
     };
 
