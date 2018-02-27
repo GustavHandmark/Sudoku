@@ -31,6 +31,7 @@ import java.util.TimerTask;
 
 /**
  * Created by gusta on 2/22/2018.
+ * chokladio helped
  */
 
 public class SudokuAdapter extends BaseAdapter {
@@ -67,8 +68,8 @@ public class SudokuAdapter extends BaseAdapter {
                     box.setText(s);
                 }
 
-                int curRegion = ((i / 3) + (j / 3));
-                if (curRegion == 0 || curRegion == 2 || curRegion == 4 || curRegion == 6 || curRegion == 8) {
+                int reg = ((i / 3) + (j / 3));
+                if (reg == 0 || reg == 2 || reg == 4 || reg == 6 || reg == 8) {
                     box.setBackgroundResource(R.drawable.rectangle_dark);
                 } else {
                     box.setBackgroundResource(R.drawable.rectangle);
@@ -199,12 +200,6 @@ public class SudokuAdapter extends BaseAdapter {
             col = position % 9;
             et = sudokuMatrix[row][col];
             et.setSelection(et.getText().length());
-//            int curRegion = ((row / 3) + (col / 3));
-//            System.out.println(curRegion);
-//            if (curRegion == 0 || curRegion == 2 || curRegion == 4 || curRegion == 6 || curRegion == 8) {
-//                et.setBackgroundResource(R.drawable.rectangle_dark);
-//            }
-
         }
 
         return et;

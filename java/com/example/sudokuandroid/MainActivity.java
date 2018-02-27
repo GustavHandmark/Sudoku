@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_disco:
                 if (!discoStarted) {
-                    hand.postDelayed(runnable,50);
+                    hand.postDelayed(runnable,30);
                     discoStarted = true;
 
                 } else {
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             int col = rand.nextInt(9);
             int regionRow = (row / 3) * 3;
             int regionCol = (col / 3) * 3;
-            int color = Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
+            int color = Color.rgb(rand.nextInt(156)+100, rand.nextInt(156)+100, rand.nextInt(156)+100);
             for (int i = regionRow; i <= regionRow + 2; i++) {
                 for (int j = regionCol; j <= regionCol + 2; j++) {
                     EditText etemp = a.getSudokuMatrix()[i][j];
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             hand.postDelayed(this,50);
-            hand.postDelayed(runnable2,350);
+            //hand.postDelayed(runnable2,350);
         }
     };
 
