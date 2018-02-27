@@ -21,8 +21,6 @@ import android.widget.EditText;
 import android.widget.GridView;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         a = new SudokuAdapter(this, sudokuModel);
         gridview = findViewById(R.id.gridview);
         gridview.setAdapter(a);
+        gridview.requestFocus();
 
 
     }

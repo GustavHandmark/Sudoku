@@ -53,20 +53,19 @@ public class SudokuAdapter extends BaseAdapter {
     }
 
     public void updateEditTextMatrix() {
-        for (int i = 0; i < sm.getMatrix().length; i++) {
-            for (int j = 0; j < sm.getMatrix()[i].length; j++) {
+        for (int i = 0; i < sudokuMatrix.length; i++) {
+            for (int j = 0; j < sudokuMatrix[i].length; j++) {
                 EditText box = new EditText(mContext);
                 box.setInputType(InputType.TYPE_CLASS_NUMBER);
                 box.setGravity(Gravity.CENTER);
                 box.setFilters(new InputFilter[]{new InputFilterMinMax(1, 9)});
                 box.setCursorVisible(false);
 
-                String s = String.valueOf(sm.getMatrix()[i][j]);
-                box.setText(String.valueOf(sm.getMatrix()[i][j]));
+                String s = String.valueOf(sm.getValue(i,j));
                 if (s.equalsIgnoreCase("0")) {
                     box.setText("");
                 } else {
-                    box.setText(String.valueOf(sm.getMatrix()[i][j]));
+                    box.setText(s);
                 }
 
                 int reg = ((i / 3) + (j / 3));
