@@ -48,10 +48,17 @@ public class SudokuAdapter extends BaseAdapter {
 
     }
 
+    /**
+     * Returns the viewable EditText matrix
+     * @return
+     */
     public EditText[][] getSudokuMatrix(){
         return sudokuMatrix;
     }
 
+    /**
+     * Updates the EditText matrix to the corresponding values in the sudoku model.
+     */
     public void updateEditTextMatrix() {
         for (int i = 0; i < sudokuMatrix.length; i++) {
             for (int j = 0; j < sudokuMatrix[i].length; j++) {
@@ -112,16 +119,12 @@ public class SudokuAdapter extends BaseAdapter {
 
 
     /**
-     * Updates the sudokuMatrix, returns true if successful,
-     * returns false if any of the numbers inserted is not an integer between 1 to 9
+     * Updates the matrix from the sudoku model with the corresponding values from the EditText matrix.
+     * Returns true if successful,
+     * Returns false if any of the numbers inserted is not an integer between 1 to 9
      *
      * @return
      */
-
-
-    public SudokuModel getSudoku() {
-        return sm;
-    }
 
     public boolean updateSudoku() {
         try {
@@ -142,6 +145,12 @@ public class SudokuAdapter extends BaseAdapter {
         }
     }
 
+    /**
+     * Calls the solve method from the model and updates the the matrices.
+     *
+     * Returns true if the model was successful in solving the sudoku.
+     * @return
+     */
     public boolean solveSudoku() {
         updateSudoku();
         Boolean check = sm.solveSudoku();
@@ -149,6 +158,9 @@ public class SudokuAdapter extends BaseAdapter {
         return check;
     }
 
+    /**
+     * Clears the EditText matrix and calls the method to clear the model matrix.
+     */
     public void clear() {
         for (int i = 0; i < sudokuMatrix.length; i++) {
             for (int j = 0; j < sudokuMatrix[i].length; j++) {
@@ -158,6 +170,10 @@ public class SudokuAdapter extends BaseAdapter {
         sm.clearMatrix();
     }
 
+    /**
+     * Returns the number of objects in the EditText matrix
+     * @return Integer
+     */
     public int getCount() {
         int c = 0;
         for (int i = 0; i < sudokuMatrix.length; i++) {
@@ -169,6 +185,12 @@ public class SudokuAdapter extends BaseAdapter {
         return c;
     }
 
+    /**
+     * Returns the EditText object at the position passed in the parameter field.
+     *
+     * @param position
+     * @return Integer
+     */
     public Object getItem(int position) {
         int row = position / 9;
         int col = position % 9;
@@ -182,6 +204,13 @@ public class SudokuAdapter extends BaseAdapter {
         return 0;
     }
 
+    /**
+     * Get a View that displays the data at the specified position in the data set.
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return EditText
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
         EditText et;
         if (convertView == null) {

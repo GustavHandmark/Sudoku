@@ -1,15 +1,11 @@
 package com.example.sudokuandroid;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -41,10 +37,12 @@ public class MainActivity extends AppCompatActivity {
         gridview.setAdapter(a);
         gridview.requestFocus();
 
-
     }
 
-    public void hideKeyboard() {
+    /**
+     * helper-method for hiding the user keyboard.
+     */
+    private void hideKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -52,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *Initializes the menu buttons in the activitybar.
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -60,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    /**
+     * Sets the actions to be executed when a button in the activitybar is pressed.
+     * Returns true if the action was executed.
+     * @param item
+     * @return boolean
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_clear:
@@ -100,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 a.notifyDataSetChanged();
                 gridview.setAdapter(a);
+                return discoStarted;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -109,6 +120,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Runnable runnable = new Runnable(){
         @Override
+        /**
+         * Changes the colors of whole regions randomly.
+         */
         public void run(){
             Random rand = new Random();
             int row = rand.nextInt(9);
@@ -129,6 +143,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Runnable runnable2 = new Runnable(){
         @Override
+        /**
+         * Changes the colors of individual cells randomly.
+         */
         public void run(){
             Random rand = new Random();
             int row = rand.nextInt(9);
