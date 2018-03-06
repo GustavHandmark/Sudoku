@@ -1,7 +1,6 @@
 package com.example.sudokuandroid;
 
 public class SudokuModel {
-	private int[][] nbrsMatrix;
     // matrix representing the sudoku grid.
     private int[][] nbrsMatrix;
 
