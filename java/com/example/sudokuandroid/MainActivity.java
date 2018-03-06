@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     hand.removeCallbacks(runnable);
                     hand.removeCallbacks(runnable2);
                     discoStarted = false;
+                    a.updateSudoku();
                     a.updateEditTextMatrix();
                 }
                 a.notifyDataSetChanged();
